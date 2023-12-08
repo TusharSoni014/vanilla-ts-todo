@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Typescript To-do App</title>
+  </head>
+  <body>
+    <div id="app" class="bg-slate-700 text-white">
+      <div class="__container w-full min-h-screen">
+        <h1
+          class="__title flex justify-center items-center p-3 gap-2 font-bold"
+        >
+          <img src="./src/typescript.svg" alt="" /> TypeScript To-Do App
+        </h1>
+        <form id="myForm" class="p-3 flex justify-center w-full">
+          <input
+            type="text"
+            class="p-3 border-none rounded"
+            placeholder="type your task here..."
+          />
+          <button type="submit" class="p-3 rounded bg-slate-800">
+            Add Task
+          </button>
+        </form>
+      </div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
