@@ -16,14 +16,29 @@
         </h1>
         <form id="myForm" class="p-3 flex justify-center w-full">
           <input
+            required
             type="text"
-            class="p-3 border-none rounded"
+            class="__input_box p-3 border-none rounded outline-none text-slate-900"
             placeholder="type your task here..."
           />
           <button type="submit" class="p-3 rounded bg-slate-800">
             Add Task
           </button>
         </form>
+        <div class="__my_tasks p-3 flex flex-col gap-3">
+          <p class="text-center text-slate-400 select-none">
+            No Task Found! Please add one
+          </p>
+          <!-- <div class="__todo p-3 rounded bg-slate-800 flex gap-3">
+            <p>${todo.title}</p>
+            <button
+              onclick="()=>console.log('1231a32')"
+              class="bg-red-500 p-3 rounded h-fit ml-auto"
+            >
+              Delete
+            </button>
+          </div> -->
+        </div>
       </div>
     </div>
     <script type="module" src="/src/main.ts"></script>

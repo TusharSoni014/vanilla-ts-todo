@@ -1,24 +1,60 @@
-import './style.css'
-import typescriptLogo from './typescript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.ts'
+import "./style.css";
 
-// document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-//   <div>
-//     <a href="https://vitejs.dev" target="_blank">
-//       <img src="${viteLogo}" class="logo" alt="Vite logo" />
-//     </a>
-//     <a href="https://www.typescriptlang.org/" target="_blank">
-//       <img src="${typescriptLogo}" class="logo vanilla" alt="TypeScript logo" />
-//     </a>
-//     <h1>Vite + TypeScript</h1>
-//     <div class="card">
-//       <button id="counter" type="button"></button>
-//     </div>
-//     <p class="read-the-docs">
-//       Click on the Vite and TypeScript logos to learn more
-//     </p>
-//   </div>
-// `
+interface Todo {
+  title: string;
+  readonly id: string;
+}
 
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
+const todos: Array<Todo> = [];
+
+const todosContainer = <HTMLElement>document.querySelector(".__my_tasks");
+const todoInput = <HTMLInputElement>(
+  document.querySelector("#myForm .__input_box")
+);
+const myForm = <HTMLFormElement>document.querySelector("#myForm");
+
+const generateTodo = (title: string, id: string) => {
+  const todoElement = <HTMLElement>document.createElement("div");
+  todoElement.className = "__todo p-3 rounded bg-slate-800 flex gap-3";
+  const paragraph = <HTMLParagraphElement>document.createElement("p");
+  paragraph.innerText = title;
+  const deleteBtn = <HTMLButtonElement>document.createElement("button");
+  deleteBtn.innerText = "Delete";
+  deleteBtn.className = "bg-red-500 p-3 rounded h-fit ml-auto";
+  deleteBtn.onclick = () => {
+    handleDelete(id);
+  };
+  todoElement.appendChild(paragraph);
+  todoElement.appendChild(deleteBtn);
+  return todoElement;
+};
+
+const renderTodos = () => {
+  todosContainer.innerHTML = "";
+  todos.forEach((todo: Todo) => {
+    const generatedTodoElement = generateTodo(todo.title, todo.id);
+    todosContainer.appendChild(generatedTodoElement);
+  });
+};
+
+const handleDelete = (id: string) => {
+  const taskIndex = todos.findIndex((todo) => todo.id === id);
+  todos.splice(taskIndex, 1);
+  renderTodos();
+};
+
+myForm.onsubmit = (e: SubmitEvent) => {
+  e.preventDefault();
+  try {
+    console.log(todoInput.value);
+    const todo: Todo = {
+      title: todoInput.value,
+      id: String(Math.random()).split(".")[1],
+    };
+    todos.push(todo);
+    renderTodos();
+    todoInput.value = "";
+  } catch (error) {
+    alert("Something went wrong!");
+  }
+};
